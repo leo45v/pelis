@@ -1,0 +1,25 @@
+<div class="card h-100" *ngIf="movie">
+  <img
+    [src]="movie.posterPath"
+    class="card-img-top"
+    [alt]="movie.originalTitle"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ movie.title }}</h5>
+    <span
+      class="badge rounded-pill"
+      [class.bg-success]="movie.voteAverage >= 7"
+      [class.bg-warning]="movie.voteAverage >= 4 && movie.voteAverage < 7"
+      [class.bg-danger]="movie.voteAverage < 4"
+      >{{ movie.voteAverage }}</span
+    >
+    <!-- 
+      1-5 Amarillo, 
+      6-7 Verde,
+      8-10 Rojo
+     -->
+    <p class="card-text">
+      {{ movie.overview }}
+    </p>
+  </div>
+</div>
