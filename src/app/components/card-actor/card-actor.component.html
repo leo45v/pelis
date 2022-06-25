@@ -1,0 +1,35 @@
+<div class="card h-100 bg-light border-2" *ngIf="actor">
+  <img [src]="actor.profile_path" class="card-img-top" [alt]="actor.name" />
+  <div class="card-body">
+    <h5 class="card-title">{{ actor.name }}</h5>
+    <span
+      class="badge rounded-pill"
+      [class.bg-success]="actor.popularity >= 150"
+      [class.bg-warning]="actor.popularity >= 95 && actor.popularity < 150"
+      [class.bg-danger]="actor.popularity < 95"
+      >{{ actor.popularity | popularity }}</span
+    >
+    <br />
+    <br />
+    <div *ngFor="let movie of actor.known_for">
+      <a
+        class="list-group-item list-group-item-action"
+        aria-current="true"
+        [routerLink]="['/movie/' + movie.id]"
+        routerLinkActive="active"
+      >
+        <b
+          class="badge rounded-pill"
+          [class.bg-success]="movie.voteAverage >= 7"
+          [class.bg-warning]="movie.voteAverage >= 4 && movie.voteAverage < 7"
+          [class.bg-danger]="movie.voteAverage < 4"
+          >{{ movie.voteAverage | popularity: 0 }}</b
+        >
+        {{ getTitle(movie) }}
+        <span class="font-size-c">{{
+          isMovie(movie) ? "Movie" : "TV Show"
+        }}</span>
+      </a>
+    </div>
+  </div>
+</div>

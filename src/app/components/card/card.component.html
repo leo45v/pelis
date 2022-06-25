@@ -1,11 +1,15 @@
-<div class="card h-100" *ngIf="movie">
-  <img
-    [src]="movie.posterPath"
-    class="card-img-top"
-    [alt]="movie.originalTitle"
-  />
+<div class="card h-100 bg-light border-2" *ngIf="movie">
+  <a [routerLink]="['/movie/' + movie.id]">
+    <img
+      [src]="movie.posterPath"
+      class="card-img-top"
+      [alt]="movie.originalTitle"
+    />
+  </a>
   <div class="card-body">
-    <h5 class="card-title">{{ movie.title }}</h5>
+    <a [routerLink]="['/movie/' + movie.id]">
+      <h5 class="card-title">{{ movie.title }}</h5>
+    </a>
     <span
       class="badge rounded-pill"
       [class.bg-success]="movie.voteAverage >= 7"
@@ -14,9 +18,9 @@
       >{{ movie.voteAverage }}</span
     >
     <!-- 
-      1-5 Amarillo, 
-      6-7 Verde,
-      8-10 Rojo
+      1-3.99 Rojo, 
+      4-6.99 Amarillo,
+      7-10 verde
      -->
     <p class="card-text">
       {{ movie.overview }}

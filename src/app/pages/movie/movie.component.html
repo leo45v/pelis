@@ -1,0 +1,80 @@
+<div class="py-4" *ngIf="movie">
+  <div class="p-2 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">{{ movie.originalTitle }}</h1>
+    </div>
+  </div>
+
+  <div class="container row">
+    <div class="col-md-9 w-100 d-flex flex-row gap-5">
+      <div class="float-start">
+        <div class="border border-2 border-success rounded-2">
+          <span
+            class="position-absolute d-flex fs-4 rounded-circle border-2 border border-light voto badge rounded-pill"
+            [class.bg-success]="movie.voteAverage >= 7"
+            [class.bg-warning]="movie.voteAverage >= 4 && movie.voteAverage < 7"
+            [class.bg-danger]="movie.voteAverage < 4"
+            >{{ movie.voteAverage | popularity: 1 }}</span
+          >
+          <img [src]="movie.posterPath" alt="" />
+        </div>
+      </div>
+      <div class="block float-start align-self-center">
+        <p class="fs-6 mb-1">
+          <strong>Titulo: </strong>
+          {{ movie.title }}
+        </p>
+        <p class="fs-6 mb-1">
+          <strong>País: </strong>
+          <span>{{ movie.production_countries[0].name }}</span>
+        </p>
+        <p class="fs-6 mb-1">
+          <strong>Año: </strong>{{ movie.releaseDate | date: "yyyy" }}
+        </p>
+        <p class="fs-6 mb-1 d-flex gap-2">
+          <strong>Generos: </strong>
+          <a
+            *ngFor="let genre of movie.genres"
+            [routerLink]="['/generos']"
+            [queryParams]="{ genreId: genre.id }"
+          >
+            {{ genre.name }}
+          </a>
+        </p>
+        <p class="fs-6 mb-1">
+          <strong>Fecha de lanzamiento: </strong
+          >{{ movie.releaseDate | date: "dd/MM/yyyy" }}
+        </p>
+        <p class="fs-6 mb-1"><strong>Duración: </strong>{{ 0 }} minutos</p>
+        <p class="fs-6 mb-1">
+          <strong>Popularidad: </strong
+          ><span
+            class="badge rounded-pill"
+            [class.bg-success]="movie.popularity >= 1500"
+            [class.bg-warning]="
+              movie.popularity >= 1000 && movie.popularity < 1500
+            "
+            [class.bg-danger]="movie.popularity < 1000"
+          >
+            {{ movie.popularity | popularity }}</span
+          >
+        </p>
+        <p class="fs-6 mb-1"><strong>Votos: </strong>{{ movie.voteCount }}</p>
+        <img [src]="movie.backdropPath" class="img-fluid" />
+      </div>
+    </div>
+    <p class="m-4">
+      <strong>Descripción general: </strong><br />
+
+      {{ movie.overview }}
+    </p>
+
+    <div class="row" *ngIf="provider">
+      <h4><strong>Proveedores:</strong></h4>
+      <div *ngFor="let prov of provider.getAll()" class="col-md-2 col-12">
+        <img [src]="prov.logo_path" class="img-fluid" />
+        <p>{{ prov.provider_name }}</p>
+      </div>
+    </div>
+  </div>
+</div>

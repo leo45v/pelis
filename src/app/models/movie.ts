@@ -13,6 +13,19 @@ export class Movie {
     public popularity: number,
     public voteCount: number,
     public video: boolean,
-    public voteAverage: number
+    public voteAverage: number,
+    public production_countries: Array<{
+      iso_3166_1: string;
+      name: string;
+    }>,
+    public production_companies: Array<{
+      id: number;
+      logo_path: string;
+      name: string;
+      origin_country: string;
+    }>,
+    public mediaType: string,
+    public genres?: Array<{ id: number; name: string }>,
+    public spoken_languages?: Array<{ iso_639_1: string; name: string }>
   ) {}
 }

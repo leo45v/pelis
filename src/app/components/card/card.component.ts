@@ -11,7 +11,5 @@ export class CardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.movie.backdropPath = `https://image.tmdb.org/t/p/w500${this.movie.backdropPath}`;
-  }
+  ngOnInit(): void {}
 }
